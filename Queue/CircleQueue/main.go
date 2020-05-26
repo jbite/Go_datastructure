@@ -7,8 +7,10 @@ import (
 )
 
 //思路
+//隊列MaxSize-1==可使用空間
 //隊列滿的時候 就是(tail +1)%maxSize == head
 //tail == head 時，隊列為空
+//隊列現有元素個數==(tail+maxSize)-head
 //初始時 tail == head == 0
 //如何統計 (tail+maxSize-head)%maxSize
 
@@ -19,6 +21,7 @@ type CircleQueue struct {
 	Array   []interface{}
 }
 
+//NewCircleQueue (l int) *CircleQueue CircleQueue的工廠函數
 func NewCircleQueue(l int) *CircleQueue {
 	c := new(CircleQueue)
 	c.MaxSize = l
@@ -28,7 +31,7 @@ func NewCircleQueue(l int) *CircleQueue {
 	return c
 }
 
-//推值入隊列
+//Push 推值入隊列
 func (c *CircleQueue) Push(d interface{}) (err error) {
 	//判斷隊列是否已滿
 	if c.IsFull() {
